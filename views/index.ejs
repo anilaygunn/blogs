@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOGSITE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Blog Listesi -->
+        <div class="form-container mb-4">
+            <h2 class="text-center mb-4">Blog Yazıları</h2>
+            <% if (blogs && blogs.length > 0) { %>
+                <div class="list-group">
+                    <% blogs.forEach((blog, index) => { %>
+                        <a href="/blog/<%= index %>" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1"><%= blog.title %></h5>
+                                <small class="text-muted">Yazar: <%= blog.author %></small>
+                            </div>
+                        </a>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <p class="text-center">Henüz blog yazısı bulunmamaktadır.</p>
+            <% } %>
+        </div>
+
+        <!-- Yeni Blog Ekleme Formu -->
+        <div class="form-container">
+            <h2 class="text-center mb-4">Yeni Blog Ekle</h2>
+            <form action="/add" method="post">
+                <div class="mb-3">
+                    <label for="author" class="form-label">Yazar Adı</label>
+                    <input type="text" class="form-control" id="author" name="author" required>
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Blog Başlığı</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Blog İçeriği</label>
+                    <textarea class="form-control blog-content" id="content" name="content" required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Blog Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
