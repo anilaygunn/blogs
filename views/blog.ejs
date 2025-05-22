@@ -10,8 +10,14 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <div class="mb-4">
+            <div class="mb-4 d-flex justify-content-between align-items-center">
                 <a href="/" class="btn btn-outline-primary">← Ana Sayfaya Dön</a>
+                <div>
+                    <a href="/edit/<%= blogId %>" class="btn btn-warning me-2">Düzenle</a>
+                    <form action="/delete/<%= blogId %>" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bu blog yazısını silmek istediğinizden emin misiniz?')">Sil</button>
+                    </form>
+                </div>
             </div>
             <h1 class="mb-3"><%= blog.title %></h1>
             <h6 class="text-muted mb-4">Yazar: <%= blog.author %></h6>

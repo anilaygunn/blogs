@@ -16,10 +16,39 @@ app.get("/", (req, res) => {
 app.get("/blog/:id", (req, res) => {
     const blogId = parseInt(req.params.id);
     if (blogId >= 0 && blogId < blogs.length) {
-        res.render("blog.ejs", { blog: blogs[blogId] });
+        res.render("blog.ejs", { blog: blogs[blogId], blogId: blogId });
     } else {
         res.redirect("/");
     }
+});
+
+app.get("/edit/:id", (req, res) => {
+    const blogId = parseInt(req.params.id);
+    if (blogId >= 0 && blogId < blogs.length) {
+        res.render("edit.ejs", { blog: blogs[blogId], blogId: blogId });
+    } else {
+        res.redirect("/");
+    }
+});
+
+app.post("/edit/:id", (req, res) => {
+    const blogId = parseInt(req.params.id);
+    if (blogId >= 0 && blogId < blogs.length) {
+        blogs[blogId] = {
+            title: req.body.title,
+            author: req.body.author,
+            content: req.body.content
+        };
+    }
+    res.redirect("/");
+});
+
+app.post("/delete/:id", (req, res) => {
+    const blogId = parseInt(req.params.id);
+    if (blogId >= 0 && blogId < blogs.length) {
+        blogs.splice(blogId, 1);
+    }
+    res.redirect("/");
 });
 
 app.post("/add", (req, res) => {    
